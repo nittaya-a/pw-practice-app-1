@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import type { TestOptions } from './test-options';
+import { createArgosReporterOptions } from "@argos-ci/playwright/reporter";
 
 require('dotenv').config();
 
@@ -21,7 +22,7 @@ export default defineConfig<TestOptions>({
         uploadToArgos: !!process.env.CI,
 
         // Set your Argos token (required if not using GitHub Actions).
-        token: "argos_7d7ac90f41be647da02c9a8ceb15c34eb1",
+        token: process.env.ARGOS_TOKEN,
       }),
     ],
     ['json', {outputFile: 'test-results/jsonReport.json'}],
